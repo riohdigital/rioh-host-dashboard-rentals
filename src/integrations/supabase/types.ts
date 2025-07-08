@@ -14,7 +14,174 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          checkin_date: string
+          checkout_date: string | null
+          created_at: string
+          guest_name: string | null
+          id: string
+          payment_status: string
+          platform: string
+          property_id: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          checkin_date: string
+          checkout_date?: string | null
+          created_at?: string
+          guest_name?: string | null
+          id?: string
+          payment_status?: string
+          platform: string
+          property_id: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          checkin_date?: string
+          checkout_date?: string | null
+          created_at?: string
+          guest_name?: string | null
+          id?: string
+          payment_status?: string
+          platform?: string
+          property_id?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      expenses: {
+        Row: {
+          amount: number
+          category: string
+          created_at: string
+          description: string
+          expense_date: string
+          id: string
+          property_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          category: string
+          created_at?: string
+          description: string
+          expense_date: string
+          id?: string
+          property_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          category?: string
+          created_at?: string
+          description?: string
+          expense_date?: string
+          id?: string
+          property_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expenses_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      properties: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          location: string
+          name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          location: string
+          name: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          location?: string
+          name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      revenues: {
+        Row: {
+          booking_id: string
+          created_at: string
+          gross_amount: number
+          id: string
+          net_amount: number
+          platform_fee: number | null
+          received_date: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          booking_id: string
+          created_at?: string
+          gross_amount: number
+          id?: string
+          net_amount: number
+          platform_fee?: number | null
+          received_date?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          booking_id?: string
+          created_at?: string
+          gross_amount?: number
+          id?: string
+          net_amount?: number
+          platform_fee?: number | null
+          received_date?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "revenues_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
